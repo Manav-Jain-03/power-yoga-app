@@ -23,12 +23,17 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Check project files
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 2 -type f | sort
+
       - name: Build APK
-        working-directory: power-app
         run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: power-yoga-apk
-          path: power-app/app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
